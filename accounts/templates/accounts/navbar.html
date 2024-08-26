@@ -16,4 +16,10 @@
       <a class="nav-link" href="{% url 'products' %}">Products</a>
     </ul>
   </div>
+  <span class="navbar-text">
+    Hello {{request.user}}
+  </span>
+  <span class="navbar-text">
+    <a href = "{% url 'logout' %}">Logout</a>
+  </span>
 </nav>
