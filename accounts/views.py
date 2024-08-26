@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
-
-# Create your views here.
 from .models import *
 from .forms import OrderForm
+from .filters import OrderFilter
 def dashboard(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -24,7 +23,10 @@ def customers(request,pk):
     orders = customer.order_set.all()
     order_count = orders.count()
     
-    context = {'customer':customer, 'orders':orders, 'order_count':order_count}
+    my_filter = OrderFilter(request.GET, queryset=orders)
+    orders = my_filter.qs
+    
+    context = {'customer':customer, 'orders':orders, 'order_count':order_count, 'my_filter':my_filter}
     return render(request, 'accounts/customer.html', context)
 
 def createOrder(request):

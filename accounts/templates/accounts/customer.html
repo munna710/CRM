@@ -1,6 +1,7 @@
 {% extends 'accounts/main.html' %}
 
 {% block content %}
+{% load widget_tweaks %}
 <br>
 
 <div class="row">
@@ -38,10 +39,10 @@
 	<div class="col">
 		<div class="card card-body">
 			<form method="get">
-		    {% comment %} {% for field in filter.form %}
+		    {% for field in my_filter.form %}
 		    	{{field.label}}
 		    	{{field|add_class:'form-control-sm'}}
-		    {% endfor %} {% endcomment %}
+		    {% endfor %}
 		    <button class="btn btn-primary" type="submit">Search</button>
 		  </form>
 		</div>
@@ -56,7 +57,7 @@
 			<table class="table table-sm">
 				<tr>
 					<th>Product</th>
-					<th>Category</th>
+					<th>Note</th>
 					<th>Date Orderd</th>
 					<th>Status</th>
 					<th>Update</th>
@@ -65,7 +66,7 @@
 				{% for order in orders %}
 					<tr>
 						<td>{{order.product}} </td>
-						<td>{{order.category}} </td>
+						<td>{{order.note}} </td>
 						<td>{{order.date_created}} </td>
 						<td>{{order.status}} </td>
 						<td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %} ">Update</a></td>
