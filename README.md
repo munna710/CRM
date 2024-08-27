@@ -24,7 +24,7 @@ This is a Customer Relationship Management (CRM) system built with Django. It in
 
 ## Shots
 ### Dashboard
-![]('images/shot1.1.png')
+![](images/shot1.1.png)
 
 ### Customer Details
-![]('images/shot1.png')
+![](images/shot1.png)
