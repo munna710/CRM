@@ -22,3 +22,9 @@ This is a Customer Relationship Management (CRM) system built with Django. It in
    ```sh
    https://github.com/munna710/CRM.git
 
+## Shots
+### Dashboard
+![]('images/shot1.1.png')
+
+### Customer Details
+![]('images/shot1.png')
