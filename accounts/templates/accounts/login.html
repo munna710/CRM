@@ -44,6 +44,11 @@
 
         
     {% endfor %}
+
+    <div class="links">
+        Don't have an account <a href="{% url 'register' %}">Register</a> | 
+        <a href="{% url 'reset_password' %}">Forgot Password?</a>
+    </div>
         
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
