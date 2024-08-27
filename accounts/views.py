@@ -10,7 +10,7 @@ from django.contrib.auth.models import Group
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
 
-
+@unauthenticated_user
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -21,7 +21,12 @@ def registerPage(request):
             group = Group.objects.get(name='customer')
             user.groups.add(group)
             
-            messages.success(request, 'Account was created for ' + user)
+            Customer.objects.create(
+                user=user,
+                name=user.username,
+            )
+            
+            messages.success(request, 'Account was created for ' + username)
             
             
             return redirect('login')
@@ -68,8 +73,16 @@ def dashboard(request):
     context = {'orders':orders, 'customers':customers, 'total_customers':total_customers, 'total_orders':total_orders, 'delivered':delivered, 'pending':pending}
     return render(request, 'accounts/dashboard.html',context)
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def userPage(request):
-    context = {}
+    orders = request.user.customer.order_set.all()
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+    
+    context = {'orders':orders, 'total_orders':total_orders, 'delivered':delivered, 'pending':pending}
     return render(request, 'accounts/user.html',context)
 
 @login_required(login_url='login')
